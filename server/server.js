@@ -1,5 +1,4 @@
-import dotenv from 'dotenv';  
-dotenv.config();  
+import 'dotenv/config';
 
 import { MongoClient } from 'mongodb';
 import express from 'express';
