@@ -261,10 +261,10 @@ footer {
 }
 
 .logo img {
-  height: 50px; /* Adjust the height as needed */
+  height: 50px; 
   width: auto;
   border-radius: 25px;
-  cursor: pointer; /* Change cursor to pointer on hover */
+  cursor: pointer; 
 }
 
 .nav-list {
@@ -296,28 +296,28 @@ footer {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem; /* Add padding to ensure content doesn't touch the edges */
+  padding: 2rem; 
   text-align: center;
-  background-color: #f9f9f9; /* Light background color */
-  min-height: 100vh; /* Ensure the container takes at least the full viewport height */
-  box-sizing: border-box; /* Include padding in the height calculation */
+  background-color: #f9f9f9; 
+  min-height: 100vh; 
+  box-sizing: border-box; 
 }
 
 .welcome-text {
-  font-size: 2.5rem; /* Larger text */
-  color: #1a73e8; /* Blue color */
+  font-size: 2.5rem; 
+  color: #1a73e8; 
   margin-bottom: 1rem;
 }
 
 .description-text {
-  font-size: 1.5rem; /* Larger text */
-  color: #1a73e8; /* Blue color */
+  font-size: 1.5rem; 
+  color: #1a73e8; 
   margin-bottom: 2rem;
 }
 
 .logo-image {
-  max-width: 100%; /* Ensure the image doesn't exceed its container */
+  max-width: 100%; 
   height: auto;
-  border-radius: 10px; /* Optional: for rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: for a subtle shadow */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }

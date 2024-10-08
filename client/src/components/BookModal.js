@@ -1,4 +1,3 @@
-// components/BookModal.js
 import React from 'react';
 
 const BookModal = ({ book, onClose }) => {

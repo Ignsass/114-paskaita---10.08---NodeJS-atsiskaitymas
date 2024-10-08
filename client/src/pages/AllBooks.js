@@ -40,7 +40,7 @@ function AllBooks() {
 
   const handleLimitChange = (e) => {
     setLimit(Number(e.target.value));
-    setPage(1); // Reset to first page when limit changes
+    setPage(1); 
   };
 
   const handleNextPage = () => {

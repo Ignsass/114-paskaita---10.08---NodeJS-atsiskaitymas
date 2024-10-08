@@ -7,7 +7,6 @@ import AllBooks from './pages/AllBooks';
 import BookDetails from './pages/BookDetails';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-
 function App() {
   return (
     <Router>
