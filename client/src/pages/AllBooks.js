@@ -12,7 +12,7 @@ function AllBooks() {
   const [available, setAvailable] = useState(false);
   const [sortBy, setSortBy] = useState('publishDate');
   const [sortOrder, setSortOrder] = useState('asc');
-  const [selectedBook, setSelectedBook] = useState(null); // State to track the selected book for the modal
+  const [selectedBook, setSelectedBook] = useState(null); 
   const availableGenres = ["Fiction", "Non-Fiction", "Fantasy", "Science", "Mystery"];
 
   useEffect(() => {
@@ -45,11 +45,11 @@ function AllBooks() {
   };
 
   const openModal = (book) => {
-    setSelectedBook(book); // Open modal with the selected book details
+    setSelectedBook(book); 
   };
 
   const closeModal = () => {
-    setSelectedBook(null); // Close the modal
+    setSelectedBook(null); 
   };
 
   const renderPagination = () => {
@@ -93,7 +93,6 @@ function AllBooks() {
     <div className="all-books">
       <h1>All Books</h1>
 
-      {/* Filtering UI */}
       <div className="filters">
         <input
           type="text"
@@ -139,7 +138,6 @@ function AllBooks() {
         </select>
       </div>
 
-      {/* Books List */}
       <div className="books">
         {books.map((book) => (
           <div key={book._id} className="book-card">
@@ -147,12 +145,11 @@ function AllBooks() {
             <h3>{book.title}</h3>
             <p>Author: {book.author}</p>
             <p>Rating: {book.rating}</p>
-            <button onClick={() => openModal(book)}>Read More</button> {/* Open modal */}
+            <button onClick={() => openModal(book)}>Read More</button> 
           </div>
         ))}
       </div>
 
-      {/* Pagination */}
       <div className="pagination">
         <button
           onClick={() => handlePageClick(page - 1)}
@@ -169,7 +166,6 @@ function AllBooks() {
         </button>
       </div>
 
-      {/* Modal for detailed book information */}
       {selectedBook && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
