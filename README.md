@@ -1,4 +1,4 @@
-.env failas yra server aplanke.
-Atsidarome du terminal langus ir nusinaviguojame į aplanką server ir aplanką client
-server pasileidžiame: npm start
-client pasileidžiame : npm start
+1) .env failas yra server aplanke.
+2) Atsidarome du terminal langus ir nusinaviguojame į aplanką server ir aplanką client
+3) server pasileidžiame: npm start
+4) client pasileidžiame : npm start
