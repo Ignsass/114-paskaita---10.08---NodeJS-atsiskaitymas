@@ -54,33 +54,61 @@ function AllBooks() {
 
   const renderPagination = () => {
     const pages = [];
-    const maxDisplayPages = 2;
-    if (totalPages <= 1) return null;
 
-    for (let i = 1; i <= totalPages; i++) {
-      if (
-        i === 1 ||
-        i === totalPages ||
-        (i >= page - maxDisplayPages && i <= page + maxDisplayPages)
-      ) {
-        pages.push(
-          <button
-            key={i}
-            onClick={() => handlePageClick(i)}
-            className={i === page ? 'active-page' : ''}
-            style={i === page ? { color: 'white', backgroundColor: 'blue' } : {}}
-          >
-            {i}
-          </button>
-        );
-      } else if (i === page - maxDisplayPages - 1 || i === page + maxDisplayPages + 1) {
-        pages.push(<span key={i}>...</span>);
-      }
+    if (totalPages <= 1) return null; 
+
+    if (page > 2) {
+      pages.push(
+        <button key={1} onClick={() => handlePageClick(1)}>
+          1
+        </button>
+      );
+    }
+
+    if (page > 3) {
+      pages.push(<span key="left-ellipsis">...</span>);
+    }
+
+    if (page > 1) {
+      pages.push(
+        <button key={page - 1} onClick={() => handlePageClick(page - 1)}>
+          {page - 1}
+        </button>
+      );
+    }
+
+    pages.push(
+      <button
+        key={page}
+        className="active-page"
+        style={{ backgroundColor: 'blue', color: 'white' }}
+      >
+        {page}
+      </button>
+    );
+
+    if (page < totalPages) {
+      pages.push(
+        <button key={page + 1} onClick={() => handlePageClick(page + 1)}>
+          {page + 1}
+        </button>
+      );
+    }
+
+    if (page < totalPages - 2) {
+      pages.push(<span key="right-ellipsis">...</span>);
+    }
+
+    if (page < totalPages - 1) {
+      pages.push(
+        <button key={totalPages} onClick={() => handlePageClick(totalPages)}>
+          {totalPages}
+        </button>
+      );
     }
 
     return pages;
   };
-
   const handleGenreChange = (genre) => {
     if (genres.includes(genre)) {
       setGenres(genres.filter((g) => g !== genre));
