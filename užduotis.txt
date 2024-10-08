@@ -1,0 +1,41 @@
+BackEnd ir Database
+Due today at 11:59 PM
+Instructions
+BackEnd (Node) ir Database (SQL arba noSQL) atsiskaitymas
+
+Sukurti reikia FullStack aplikaciją tiek su Front'u, tiek su Back'u, kuris kreipiasi į pasirinktą duomenų bazę.
+Tema - bibliotekoje esančių knygų apžvalgos svetainė.
+
+Front:
+Header: Logotipas ir navigacija tarp Home ir AllBooks puslapių.
+Puslapiai:
+Home - Įvadinis puslapis (laisvas pasirinkimas kas atvaizduojama).
+All books - Visų knygų apžvalgos puslapis su:
+Knygų kortelėmis, kuriose pavaizduota: title, dalis description, author, genres, public date, mygtukas skaityti plačiau (ant kurio paspaudus vartotojas bus nukeliamas į tos knygos specifinį puslapį naujame tab'e).
+Filtravimu pagal šiuos kriterijus: pavadinimą (dalinis tekstas), žanrus (pasirinkti 3-5 kuriuos atvaizduoti pasirinkti vartotojui), leidimo metus (nuo ir iki), ar šiuo metu turi knygyne (amount of copies ar daugiau nei 0 (su checkbox)).
+Rikiavimu pagal šiuos kriterijus: Reitingą, leidimo datą, puslapių kiekį (ASC ir DESC visus).
+Puslapiavimu. Viename puslapyje rodoma 10 knygų.
+Specific book - išsami/pilna informacija apie vieną knygą.
+Footer: Copyrights, socialinių tinklų ikonos su nuorodomis, bibliotekos lokacija su darbo laiku (susigalvoti random).
+Kita Front'o informacija: 
+Naudoti React'ą. Konteksto kurti nebūtina. Nenaudoti komponentų bibliotekų (galima naudoti formoms ir ikonoms). Stilizuoti pasirinktinu būdu. Kurti atskirus komponentus atskiriems elementams (nebūtina labai išskirstyti į mažus gabaliukus, bet ir neturėti vos keletos komponentų kur viskas viename sukimšta).
+Back:
+Route'ai:
+Gauti visas knygas pagal filtravimo, rikiavimo ir puslapiavimo nustatymus perduotus req.query'je.
+Gauti vieną knygą pagal ID parametrą.
+Kita Back'o informacija:
+Naudoti Express; Cors su nustatytu origin, kuris leistų kreiptis tik tavo nurodytam Front'o port'ui iš lokalaus įrenginio (localhost); .env kuriame nurodyti PORT'ai, DB prisijungimai ir kita.
+Database:
+Pasirinkti SQL arba noSQL duomenų bazės tipą.
+Užtikrinti, kad taisant darbą galima būtų prisijungti iš kito IP adreso.
+Užpildyti duomenų bazę pateiktais duomenimis (galima susikurti papildomų duomenų, bet jie privalo turėti visus laukus kaip ir pateikti duomenys)
+
+Užduoties įkėlimo instrukcijos:
+Instrukcijas, kaip valdyti GitHub repozitorijas rasite - https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories arba step-by-step žemiau.
+1. Sukurti GitHub repozitoriją.
+Instrukcijas, kaip susikurti GitHub repozitoriją rasite - https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository
+2. Kuriant sistemą pakeitimus nuolatos saugoti su prasmingomis "commit" žinutėmis.
+3. Sukurkite Readme.md failą, kuriame aprašyta kokius žingsnius reikia atlikti norint pasileisti projektą.
+4. Pabaigus projektą patikrinti ar visi pakeitimai yra nusiųsti į GitHub ir pateikti nuorodą šiame "assignment".
+5. Prikabinkite failą, kuriame būtų nurodyti prisijungimai į duomenų bazę.
+Sėkmės!
