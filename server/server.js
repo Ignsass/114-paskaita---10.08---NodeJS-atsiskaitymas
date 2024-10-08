@@ -32,10 +32,7 @@ app.get('/api/books', async (req, res) => {
   if (available === 'true') filter.amountOfCopies = { $gt: 0 }; 
 
   try {
-    const client = await MongoClient.connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    const client = await MongoClient.connect(uri);
 
     const coll = client.db('atsiskaitymas').collection('books');
     const cursor = coll.find(filter).sort(sort).skip(skip).limit(parsedLimit);
@@ -53,10 +50,7 @@ app.get('/api/books/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const client = await MongoClient.connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    const client = await MongoClient.connect(uri);
 
     const coll = client.db('atsiskaitymas').collection('books');
     const book = await coll.findOne({ _id: id });
