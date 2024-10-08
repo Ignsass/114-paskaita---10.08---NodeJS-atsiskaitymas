@@ -1,4 +1,3 @@
-// models/bookModel.js
 import mongoose from 'mongoose';
 
 const bookSchema = new mongoose.Schema({
@@ -13,5 +12,4 @@ const bookSchema = new mongoose.Schema({
   imageUrl: { type: String, required: true },
 });
 
-// Here, the third argument 'books' tells Mongoose the exact collection name to use.
 export const Book = mongoose.model('Book', bookSchema, 'books');

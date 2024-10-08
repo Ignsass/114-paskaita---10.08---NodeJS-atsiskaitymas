@@ -1,4 +1,3 @@
-// config.js
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
@@ -9,7 +8,7 @@ export const connectDB = async () => {
     await mongoose.connect(process.env.DB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      dbName: 'atsiskaitymas',  // Ensure the correct database name is used here
+      dbName: 'atsiskaitymas', 
     });
     console.log('MongoDB connected...');
   } catch (err) {
