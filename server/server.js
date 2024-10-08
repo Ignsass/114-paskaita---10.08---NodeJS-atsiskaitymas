@@ -8,7 +8,7 @@ const port = process.env.PORT || 5000;
 const uri = process.env.DB_URI;
 let db; 
 
-MongoClient.connect(uri, { useUnifiedTopology: true })
+MongoClient.connect(uri)
   .then((client) => {
     db = client.db('atsiskaitymas');
     console.log('Connected to MongoDB');
