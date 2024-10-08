@@ -5,14 +5,14 @@ function AllBooks() {
   const [books, setBooks] = useState([]);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
-  const [totalPages, setTotalPages] = useState(1); 
+  const [totalPages, setTotalPages] = useState(1);
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [genres, setGenres] = useState([]);
   const [available, setAvailable] = useState(false);
   const [sortBy, setSortBy] = useState('publishDate');
   const [sortOrder, setSortOrder] = useState('asc');
-  const [selectedBook, setSelectedBook] = useState(null);
+  const [selectedBook, setSelectedBook] = useState(null); // State to track the selected book for the modal
   const availableGenres = ["Fiction", "Non-Fiction", "Fantasy", "Science", "Mystery"];
 
   useEffect(() => {
@@ -33,32 +33,52 @@ function AllBooks() {
           sortOrder,
         },
       });
-      setBooks(response.data.books || []); 
-      setTotalPages(response.data.totalPages || 1); 
+      setBooks(response.data.books);
+      setTotalPages(response.data.totalPages);
     } catch (error) {
       console.error('Error fetching books:', error);
     }
   };
-  
-  const handleLimitChange = (e) => {
-    setLimit(Number(e.target.value));
-    setPage(1); 
-  };
 
-  const handleNextPage = () => {
-    if (page < totalPages) {
-      setPage(page + 1);
-    }
-  };
-
-  const handlePreviousPage = () => {
-    if (page > 1) {
-      setPage(page - 1);
-    }
-  };
-
-  const handlePageSelect = (pageNumber) => {
+  const handlePageClick = (pageNumber) => {
     setPage(pageNumber);
+  };
+
+  const openModal = (book) => {
+    setSelectedBook(book); // Open modal with the selected book details
+  };
+
+  const closeModal = () => {
+    setSelectedBook(null); // Close the modal
+  };
+
+  const renderPagination = () => {
+    const pages = [];
+    const maxDisplayPages = 2;
+    if (totalPages <= 1) return null;
+
+    for (let i = 1; i <= totalPages; i++) {
+      if (
+        i === 1 ||
+        i === totalPages ||
+        (i >= page - maxDisplayPages && i <= page + maxDisplayPages)
+      ) {
+        pages.push(
+          <button
+            key={i}
+            onClick={() => handlePageClick(i)}
+            className={i === page ? 'active-page' : ''}
+            style={i === page ? { color: 'white', backgroundColor: 'blue' } : {}}
+          >
+            {i}
+          </button>
+        );
+      } else if (i === page - maxDisplayPages - 1 || i === page + maxDisplayPages + 1) {
+        pages.push(<span key={i}>...</span>);
+      }
+    }
+
+    return pages;
   };
 
   const handleGenreChange = (genre) => {
@@ -69,17 +89,11 @@ function AllBooks() {
     }
   };
 
-  const openModal = (book) => {
-    setSelectedBook(book);
-  };
-
-  const closeModal = () => {
-    setSelectedBook(null);
-  };
-
   return (
     <div className="all-books">
       <h1>All Books</h1>
+
+      {/* Filtering UI */}
       <div className="filters">
         <input
           type="text"
@@ -123,48 +137,39 @@ function AllBooks() {
           <option value="asc">Ascending</option>
           <option value="desc">Descending</option>
         </select>
-        <input
-          type="number"
-          min="1"
-          value={limit}
-          onChange={handleLimitChange}
-          placeholder="Books per page"
-        />
       </div>
-      <div className="books">
-  {books && books.length > 0 ? (
-    books.map((book) => (
-      <div key={book._id} className="book-card">
-        <img src={book.imageUrl} alt={book.title} />
-        <h3>{book.title}</h3>
-        <p>Author: {book.author}</p>
-        <p>Rating: {book.rating}</p>
-        <button onClick={() => openModal(book)}>Read More</button>
-      </div>
-    ))
-  ) : (
-    <p>No books available</p> 
-  )}
-</div>
 
+      {/* Books List */}
+      <div className="books">
+        {books.map((book) => (
+          <div key={book._id} className="book-card">
+            <img src={book.imageUrl} alt={book.title} />
+            <h3>{book.title}</h3>
+            <p>Author: {book.author}</p>
+            <p>Rating: {book.rating}</p>
+            <button onClick={() => openModal(book)}>Read More</button> {/* Open modal */}
+          </div>
+        ))}
+      </div>
+
+      {/* Pagination */}
       <div className="pagination">
-        <button onClick={handlePreviousPage} disabled={page === 1}>
+        <button
+          onClick={() => handlePageClick(page - 1)}
+          disabled={page === 1}
+        >
           Previous
         </button>
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => handlePageSelect(index + 1)}
-            disabled={page === index + 1}
-          >
-            {index + 1}
-          </button>
-        ))}
-        <button onClick={handleNextPage} disabled={page === totalPages}>
+        {renderPagination()}
+        <button
+          onClick={() => handlePageClick(page + 1)}
+          disabled={page === totalPages}
+        >
           Next
         </button>
       </div>
 
+      {/* Modal for detailed book information */}
       {selectedBook && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -183,6 +188,7 @@ function AllBooks() {
           </div>
         </div>
       )}
+
     </div>
   );
 }
