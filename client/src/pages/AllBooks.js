@@ -5,6 +5,7 @@ function AllBooks() {
   const [books, setBooks] = useState([]);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
+  const [totalPages, setTotalPages] = useState(1); 
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [genres, setGenres] = useState([]);
@@ -32,25 +33,32 @@ function AllBooks() {
           sortOrder,
         },
       });
-      setBooks(response.data);
+      setBooks(response.data.books || []); 
+      setTotalPages(response.data.totalPages || 1); 
     } catch (error) {
       console.error('Error fetching books:', error);
     }
   };
-
+  
   const handleLimitChange = (e) => {
     setLimit(Number(e.target.value));
     setPage(1); 
   };
 
   const handleNextPage = () => {
-    setPage(page + 1);
+    if (page < totalPages) {
+      setPage(page + 1);
+    }
   };
 
   const handlePreviousPage = () => {
     if (page > 1) {
       setPage(page - 1);
     }
+  };
+
+  const handlePageSelect = (pageNumber) => {
+    setPage(pageNumber);
   };
 
   const handleGenreChange = (genre) => {
@@ -124,22 +132,37 @@ function AllBooks() {
         />
       </div>
       <div className="books">
-        {books.map((book) => (
-          <div key={book._id} className="book-card">
-            <img src={book.imageUrl} alt={book.title} />
-            <h3>{book.title}</h3>
-            <p>Author: {book.author}</p>
-            <p>Rating: {book.rating}</p>
-            <button onClick={() => openModal(book)}>Read More</button>
-          </div>
-        ))}
+  {books && books.length > 0 ? (
+    books.map((book) => (
+      <div key={book._id} className="book-card">
+        <img src={book.imageUrl} alt={book.title} />
+        <h3>{book.title}</h3>
+        <p>Author: {book.author}</p>
+        <p>Rating: {book.rating}</p>
+        <button onClick={() => openModal(book)}>Read More</button>
       </div>
+    ))
+  ) : (
+    <p>No books available</p> 
+  )}
+</div>
+
       <div className="pagination">
         <button onClick={handlePreviousPage} disabled={page === 1}>
           Previous
         </button>
-        <span>Page {page}</span>
-        <button onClick={handleNextPage}>Next</button>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index + 1}
+            onClick={() => handlePageSelect(index + 1)}
+            disabled={page === index + 1}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button onClick={handleNextPage} disabled={page === totalPages}>
+          Next
+        </button>
       </div>
 
       {selectedBook && (
